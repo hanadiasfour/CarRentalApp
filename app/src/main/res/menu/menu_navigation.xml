@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/browse_cars_nav_item"
+        android:title="Browse Cars"
+        android:icon="@drawable/car"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/my_cars_nav_item"
+        android:title="My Cars"
+        android:icon="@drawable/steering"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/renting_nav_item"
+        android:title="Renting"
+        android:icon="@drawable/renting"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/settings_nav_item"
+        android:title="Settings"
+        android:icon="@drawable/settings"
+        app:showAsAction="always"
+        />
+
+</menu>
