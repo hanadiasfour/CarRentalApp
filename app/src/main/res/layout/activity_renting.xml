@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/light_blue"
+        app:itemBackground="@color/blue2"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
         app:menu="@menu/menu_navigation" />

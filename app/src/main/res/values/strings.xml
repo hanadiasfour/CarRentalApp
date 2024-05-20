@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">MobileProject</string>
+    <string name="rent_button">Rent This Car!</string>
+    <string name="location_spinner_label">Location</string>
+    <string name="price_range_label">Select a Price Range</string>
+    <string name="price_sorting_label">Sort Price</string>
+    <string name="price_asc_label">Ascending</string>
+    <string name="price_dsc_label">Descending</string>
+    <string name="apply_filter">Apply</string>
+    <string name="cancel_filter">Cancel</string>
+
+
+
+
+
+
+    <string-array name="location_values">
+        <item>Select a Location</item>
+        <item>Ramallah</item>
+        <item>Nablus</item>
+        <item>Jerusalem</item>
+        <item>Hebron</item>
+        <item>Jericho</item>
+        <item>Jenin</item>
+        <item>Tulkaram</item>
+        <item>Qalqilya</item>
+    </string-array>
+
+    <string-array name="range_values">
+            <item>0</item>
+            <item>10000</item>
+    </string-array>
 </resources>

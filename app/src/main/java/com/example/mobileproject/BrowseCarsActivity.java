@@ -13,12 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class BrowseCarsActivity extends AppCompatActivity {
 
-    Button b;
+
+    private ArrayList<CarCatalogItemModel> catalogList = new ArrayList<>();
+    private RecyclerView CCI_RV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +33,34 @@ public class BrowseCarsActivity extends AppCompatActivity {
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_browse_cars);
-        b= findViewById(R.id.b);
+        handelTabSwitch();
+
+        CCI_RV = (RecyclerView)findViewById(R.id.CCI_RecyclerView);
+
+        setCatalogData();
+
+        CCI_RecyclerViewAdapter CCI_adapter = new CCI_RecyclerViewAdapter(this,catalogList);
+        CCI_RV.setAdapter(CCI_adapter);
+        CCI_RV.setLayoutManager(new LinearLayoutManager(this));
 
 
+    }
+
+    public void openFilters(View view){
+        startActivity(new Intent(this, FilterActivity.class));
+
+    }
+
+
+    public void setCatalogData(){
+
+        for(int i =1;i<=5 ;i++) {
+            catalogList.add(new CarCatalogItemModel(R.drawable.default_car, i*1000, "Very Nice Car " + i));
+        }
+    }
+
+
+    public void handelTabSwitch(){
 
         // Initialize and assign variable
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -51,10 +82,10 @@ public class BrowseCarsActivity extends AppCompatActivity {
                 }else if (id == R.id.browse_cars_nav_item) {
                     return true;
                 } else if (id == R.id.settings_nav_item){
-                        startActivity(new Intent(getApplicationContext(), Settings.class));
-                        overridePendingTransition(0, 0);
+                    startActivity(new Intent(getApplicationContext(), Settings.class));
+                    overridePendingTransition(0, 0);
 
-                        return true;
+                    return true;
                 }else if(id == R.id.renting_nav_item){
 
                     startActivity(new Intent(getApplicationContext(), RentingActivity.class));
@@ -66,13 +97,6 @@ public class BrowseCarsActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-    }
-
-    public void trial(View view){
-
-        startActivity(new Intent(this, tryMe.class));
-
 
 
     }
