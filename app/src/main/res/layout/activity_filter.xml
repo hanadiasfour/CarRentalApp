@@ -1,0 +1,131 @@
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/location_label"
+        style="@style/HeadlineTextStyleFilters"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="@string/location_spinner_label"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        />
+
+    <Spinner
+        android:id="@+id/location_spinner_filter"
+        android:layout_marginTop="20dp"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/location_label"
+        />
+
+    <TextView
+        android:id="@+id/price_range_label"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/price_range_label"
+        style="@style/HeadlineTextStyleFilters"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/location_label"
+        android:layout_alignParentStart="true"
+        />
+
+    <com.google.android.material.slider.RangeSlider
+        style="@style/CustomRangeSlider"
+        android:id="@+id/range_slider_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:thumbStrokeWidth="2dp"
+        app:values="@array/range_values"
+        app:labelBehavior="floating"
+        android:layout_below="@+id/price_range_label"
+        />
+
+
+    <TextView
+        android:id="@+id/price_order_label"
+        style="@style/HeadlineTextStyleFilters"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="@string/price_sorting_label"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/range_slider_filter"
+
+        />
+
+    <RadioGroup
+        android:id="@+id/price_sorting_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/price_order_label"
+        >
+
+        <RadioButton
+            android:id="@+id/price_dsc_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_asc_label"
+            style="@style/NormalTextStyle"
+            />
+
+
+        <RadioButton
+            android:id="@+id/price_asc_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_dsc_label"
+            style="@style/NormalTextStyle"
+            />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_below="@+id/price_sorting_group"
+        android:layout_marginTop="25dp"
+        >
+
+        <Button
+            android:id="@+id/btn_apply_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_filter"
+            app:backgroundTint="@null"
+            style="@style/AppButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/btn_cancel_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_filter"
+            app:backgroundTint="@null"
+            style="@style/AppButtonStyle"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
+</ScrollView>
