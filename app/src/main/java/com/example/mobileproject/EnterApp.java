@@ -11,7 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class EnterApp extends AppCompatActivity {
+public class EnterApp extends AppCompatActivity {//yusra
 
 
     Button enter;
