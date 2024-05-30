@@ -1,6 +1,6 @@
 package com.example.mobileproject;
 
-public class CarCatalogItemModel {
+public class CarCatalogItemModel {//hhhhhhh
     //variables
     private int image, price;
     private String name;
