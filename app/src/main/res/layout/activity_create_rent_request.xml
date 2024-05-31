@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_rent_request_xml"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue3"
+    tools:context=".CreateRentRequestActivity">
+
+    <Button
+        android:id="@+id/create_rent_request_back"
+        style="@style/BackButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="backToViewCarDetails"
+        />
+
+    <TextView
+        android:id="@+id/create_rent_request_name"
+        style="@style/HeadlineTextStyle"
+        android:text="Car name here"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/create_rent_request_back"
+        />
+
+    <ScrollView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_rent_request_back"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            >
+            <TextView
+                style="@style/HeadlineTextStyle"
+                android:text="@string/pickNdrop"
+                android:layout_width="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="0dp"
+                />
+
+            <Spinner
+                style="@style/CustomSpinnerStyle"
+                android:id="@+id/create_rent_request_spinner"
+                android:layout_marginBottom="20dp"
+                android:layout_width="220dp"
+                android:layout_height="60dp"
+                android:entries="@array/location_values"
+                android:background="@drawable/border"
+                />
+
+
+
+
+
+            <TextView
+                style="@style/HeadlineTextStyle"
+                android:text="@string/startDate"
+                android:layout_width="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="0dp"
+            />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/create_rent_request_start_text"
+                    style="@style/NormalTextStyle"
+                    android:text="date here"
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/border"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/create_rent_request_start_button"
+                    android:drawableLeft="@drawable/calander"
+                    android:background="@android:color/transparent"
+                    android:onClick="openStartDatePicker"
+                    />
+            </LinearLayout>
+
+
+
+
+
+            <TextView
+                style="@style/HeadlineTextStyle"
+                android:text="@string/endDate"
+                android:layout_width="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="0dp"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/create_rent_request_end_text"
+                    style="@style/NormalTextStyle"
+                    android:text="date here"
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/border"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/create_rent_request_end_button"
+                    android:drawableLeft="@drawable/calander"
+                    android:background="@android:color/transparent"
+                    android:onClick="openEndDatePicker"
+                    />
+
+            </LinearLayout>
+
+
+
+
+            <TextView
+                style="@style/HeadlineTextStyle"
+                android:text="@string/calPrice"
+                android:layout_width="wrap_content"
+                android:layout_margin="0dp"
+                />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            >
+
+        <TextView
+                android:id="@+id/create_rent_request_price"
+                style="@style/NormalTextStyle"
+                android:text="2000"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:background="@drawable/border"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:src="@drawable/shekel"
+                android:gravity="center"
+                android:layout_marginLeft="17dp"
+                />
+        </LinearLayout>
+
+
+            <Button
+                android:id="@+id/view_car_rent_button"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                style="@style/AppButtonStyle"
+                app:backgroundTint="@null"
+                android:text="@string/request_rent"
+                android:layout_gravity="center"
+                android:onClick="sendRentRequest"
+                />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
