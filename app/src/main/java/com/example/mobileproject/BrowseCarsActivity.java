@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,7 +22,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 public class BrowseCarsActivity extends AppCompatActivity {
-
 
     private ArrayList<CarCatalogItemModel> catalogList = new ArrayList<>();
     private RecyclerView CCI_RV;
@@ -45,6 +45,7 @@ public class BrowseCarsActivity extends AppCompatActivity {
 
 
     }
+
 
     public void openFilters(View view){
         startActivity(new Intent(this, FilterActivity.class));

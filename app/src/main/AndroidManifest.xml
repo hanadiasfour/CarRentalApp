@@ -25,6 +25,9 @@
             android:name=".createAccount"
             android:exported="false" />
         <activity
+            android:name=".CreateRentRequestActivity"
+            android:exported="false" />
+        <activity
             android:name=".FilterActivity"
             android:exported="false"
             android:theme="@style/MyDialogStyle" />
@@ -33,7 +36,7 @@
             android:exported="false" />
         <activity
             android:name=".Main1"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
