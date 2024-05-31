@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class EnterApp extends AppCompatActivity {//yusra
 
-
+//hanadi edit
     Button enter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
