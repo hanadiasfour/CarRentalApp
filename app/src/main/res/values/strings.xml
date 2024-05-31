@@ -10,10 +10,6 @@
     <string name="cancel_filter">Cancel</string>
 
 
-
-
-
-
     <string-array name="location_values">
         <item>Select a Location</item>
         <item>Ramallah</item>
@@ -27,7 +23,7 @@
     </string-array>
 
     <string-array name="range_values">
-            <item>0</item>
-            <item>10000</item>
+        <item>0</item>
+        <item>10000</item>
     </string-array>
 </resources>
