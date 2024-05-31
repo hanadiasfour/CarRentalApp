@@ -14,10 +14,6 @@
     <string name="calPrice">Price to Pay</string>
     <string name="request_rent">Place Rent Request</string>
 
-
-
-
-
     <string-array name="location_values">
         <item>Select a Location</item>
         <item>Ramallah</item>
