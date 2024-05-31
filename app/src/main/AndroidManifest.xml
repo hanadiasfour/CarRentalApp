@@ -13,24 +13,23 @@
         android:theme="@style/Theme.MobileProject"
         tools:targetApi="31">
         <activity
+            android:name=".CreateRentRequestActivity"
+            android:exported="false" />
+        <activity
             android:name=".FilterActivity"
             android:exported="false"
-            android:theme="@style/MyDialogStyle"/>
-
+            android:theme="@style/MyDialogStyle" />
         <activity
             android:name=".ViewCarActivity"
             android:exported="false" />
         <activity
             android:name=".EnterApp"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".RentingActivity"

@@ -5,6 +5,7 @@
     android:id="@+id/view_car_xml"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue3"
     tools:context=".ViewCarActivity">
 
     <Button
@@ -12,9 +13,11 @@
         style="@style/BackButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:onClick="backToBrowse"
         />
 
     <TextView
+        android:id="@+id/view_car_name"
         style="@style/HeadlineTextStyle"
         android:text="Car name here"
         android:layout_width="match_parent"
@@ -28,12 +31,15 @@
     android:layout_below="@+id/view_car_back"
     android:layout_alignParentLeft="true"
     android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp">
+    android:layout_marginBottom="10dp"
+    android:background="@color/white"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="20dp">
 
         <ImageView
             android:id="@+id/view_car_image"
@@ -48,6 +54,7 @@
                 style="@style/HeadlineTextStyle"
                 android:text="$ Per Day "
                 android:layout_width="wrap_content"
+
                 />
 
             <TextView
@@ -64,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="40dp"
-
                 android:background="@drawable/border"
                 >
 
@@ -111,11 +117,12 @@
         <Button
             android:id="@+id/view_car_rent_button"
             android:layout_width="190dp"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             style="@style/AppButtonStyle"
             app:backgroundTint="@null"
             android:text="@string/rent_button"
             android:layout_gravity="center"
+            android:onClick="setDetailsToRentCar"
             />
 
     </LinearLayout>

@@ -1,11 +1,13 @@
 package com.example.mobileproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,12 +21,11 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
     private Context context;
     private ArrayList<CarCatalogItemModel> catalogList;
 
+
     //constructor
     public CCI_RecyclerViewAdapter(Context context, ArrayList<CarCatalogItemModel> catalogList){
         this.catalogList = catalogList;
         this.context = context;
-
-
     }
 
     @NonNull
@@ -42,6 +43,25 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
         holder.carImg.setImageResource(catalogList.get(position).getImage());
         holder.price.setText(catalogList.get(position).getPrice() + " / Per Day");
         holder.name.setText(catalogList.get(position).getName());
+
+        TextView price = holder.price;
+        TextView name = holder.name;
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the click event here
+                Toast.makeText(context, "Clicked: " + name, Toast.LENGTH_SHORT).show();
+
+
+                Intent intent = new Intent(context,ViewCarActivity.class);
+//                intent.putExtra(the car id from database)
+
+                context.startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -62,10 +82,8 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
             price =(TextView) itemView.findViewById(R.id.car_catalog_item_price);
             name =(TextView) itemView.findViewById(R.id.car_catalog_item_name);
 
-
-
-
         }
+
     }
 }
 
