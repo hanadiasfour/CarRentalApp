@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Create_Account">
+    tools:context=".createAccount">
 
     <ImageView
         android:id="@+id/dlogo"
@@ -40,19 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8" />
-
-    <EditText
-        android:id="@+id/dob"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:hint="Date of Birth"
-        android:inputType="date"
-        app:layout_constraintTop_toBottomOf="@id/username"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.8" />
-
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
@@ -60,7 +47,7 @@
         android:layout_marginTop="25dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/dob"
+        app:layout_constraintTop_toBottomOf="@id/username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8" />
@@ -94,7 +81,7 @@
         android:layout_width="228dp"
         android:layout_height="41dp"
         android:layout_marginTop="60dp"
-        android:background="@color/light_blue"
+        app:backgroundTint="@color/blue"
         android:text="Create Account"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +108,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="Log In"
-        android:textColor="@color/blue2"
+        android:textColor="@color/blue"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

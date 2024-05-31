@@ -1,4 +1,4 @@
-package com.example.projectt;
+package com.example.mobileproject;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +47,7 @@ public class login extends AppCompatActivity {
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(login.this, Create_Account.class);
+                Intent intent = new Intent(login.this, createAccount.class);
                 startActivity(intent);
             }
         });

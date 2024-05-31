@@ -18,7 +18,6 @@ public class createAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         usernameEditText = findViewById(R.id.username);
-        dobEditText = findViewById(R.id.dob);
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         confirmPasswordEditText = findViewById(R.id.confirm_password);
@@ -41,7 +40,7 @@ public class createAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(createAccount.this, com.example.projectt.login.class);
+                Intent intent = new Intent(createAccount.this,login.class);
                 startActivity(intent);
             }
         });
