@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/my_cars_xml"
-    tools:context=".EditActivity">
+    tools:context=".AddNewCarActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
-            android:id="@+id/car_name2"
+            android:id="@+id/car_name5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -67,7 +67,7 @@
             android:layout_marginTop="16dp"
             android:hint="Price Per Day"
             android:inputType="numberDecimal"
-            app:layout_constraintTop_toBottomOf="@id/car_name2"
+            app:layout_constraintTop_toBottomOf="@id/car_name5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintWidth_percent="0.8" />
@@ -96,7 +96,7 @@
             app:layout_constraintWidth_percent="0.8" />
 
         <Button
-            android:id="@+id/Delete_button"
+            android:id="@+id/Addb"
             android:layout_width="184dp"
             android:layout_height="47dp"
             android:layout_marginTop="30dp"

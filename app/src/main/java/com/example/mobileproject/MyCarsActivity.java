@@ -1,4 +1,4 @@
-package com.example.mycarsapp;
+package com.example.mobileproject;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
-import com.example.mobileproject.AddNewCar;
-import com.example.mobileproject.Request;
-import com.example.mobileproject.login;
-
 public class MyCarsActivity extends AppCompatActivity {
 
     private ImageButton photoButton;
@@ -35,14 +29,6 @@ public class MyCarsActivity extends AppCompatActivity {
         photoButton = findViewById(R.id.photoButton);
         addButton = findViewById(R.id.addButton);
         topLabel = findViewById(R.id.topLabel);
-        carImage1 = findViewById(R.id.carImage1);
-        carImage2 = findViewById(R.id.carImage2);
-        carName1 = findViewById(R.id.carName1);
-        carPrice1 = findViewById(R.id.carPrice1);
-        carDescription1 = findViewById(R.id.carDescription1);
-        carName2 = findViewById(R.id.carName2);
-        carPrice2 = findViewById(R.id.carPrice2);
-        carDescription2 = findViewById(R.id.carDescription2);
 
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +51,7 @@ public class MyCarsActivity extends AppCompatActivity {
     }
 
     private void addCarsOpen() {
-        Intent intent = new Intent(this, AddNewCar.class);
+        Intent intent = new Intent(this, AddNewCarActivity.class);
         startActivity(intent);
     }
 }
