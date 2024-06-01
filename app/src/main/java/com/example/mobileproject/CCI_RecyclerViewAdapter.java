@@ -25,6 +25,15 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
     private ArrayList<CarCatalogItemModel> catalogList;
 
 
+
+    public void setFiltered (ArrayList<CarCatalogItemModel> catalogList){
+
+        this.catalogList = catalogList;
+        notifyDataSetChanged();
+
+    }
+
+
     //constructor
     public CCI_RecyclerViewAdapter(Context context, ArrayList<CarCatalogItemModel> catalogList){
         this.catalogList = catalogList;

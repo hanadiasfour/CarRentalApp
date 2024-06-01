@@ -23,7 +23,7 @@ public class FilterActivity extends AppCompatActivity {
         String[] values =getResources().getStringArray(R.array.location_values);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, values);
+                R.layout.spinner_item, values);
 
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);

@@ -19,30 +19,57 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border">
 
+            <TextView
+                android:id="@+id/car_catalog_item_name"
+                style="@style/HeadlineTextStyle"
+                android:textSize="25dp"
+                android:background="@drawable/border"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:text="Car Name Here" />
+
             <ImageView
                 android:id="@+id/car_catalog_item_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@id/car_catalog_item_name"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/border"
                 android:src="@drawable/default_car" />
 
-            <TextView
-                android:id="@+id/car_catalog_item_name"
-                style="@style/HeadlineTextStyle"
-                android:background="@drawable/border"
-                android:layout_below="@id/car_catalog_item_image"
-                android:layout_alignParentLeft="true"
-                android:text="Car Name Here" />
 
             <TextView
                 android:id="@+id/car_catalog_item_price"
-                style="@style/HeadlineTextStyle"
+                style="@style/BrowseTextStyle"
+                android:textSize="40dp"
                 android:background="@drawable/border"
                 android:layout_below="@id/car_catalog_item_image"
+                android:layout_alignParentLeft="true"
+                android:text="6000"
+                />
+
+
+
+            <ImageView
+                android:layout_marginTop="25dp"
+                android:id="@+id/shekel_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/big_sekel"
+                android:layout_toRightOf="@id/car_catalog_item_price"
+                android:layout_below="@id/car_catalog_item_image"
+
+                />
+            <TextView
+                style="@style/HeadlineTextStyle"
+                android:layout_below="@id/car_catalog_item_image"
+                android:text="@string/price_per_day"
+                android:layout_toRightOf="@id/shekel_pic"
+                android:layout_marginTop="25dp"
                 android:layout_alignParentRight="true"
-                android:text="Price Per Day" />
+                android:textSize="30dp"
+
+                />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

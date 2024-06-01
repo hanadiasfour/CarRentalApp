@@ -8,28 +8,14 @@
     android:id="@+id/main"
     tools:context=".BrowseCarsActivity">
 
-    <Button
-        android:id="@+id/CC_search"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:drawableTop="@drawable/search"
-        android:background="@android:color/transparent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="10dp"
-        />
 
-    <EditText
-        android:id="@+id/CC_searchBox"
+
+    <SearchView
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/CC_search"
-        android:layout_margin="10dp"
-        android:background="@drawable/border"
-        />
-
-
+        android:layout_height="60dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search cars" />
 
 
 <androidx.recyclerview.widget.RecyclerView
@@ -37,7 +23,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:layout_below="@+id/CC_search"
+    android:layout_below="@+id/searchView"
     android:layout_alignParentLeft="true"
     android:layout_above="@+id/bottom_navigation"
     />

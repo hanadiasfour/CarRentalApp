@@ -13,9 +13,10 @@
     <string name="endDate">To Date</string>
     <string name="calPrice">Price to Pay</string>
     <string name="request_rent">Place Rent Request</string>
+    <string name="price_per_day">/ Per Day</string>
 
 
-    <string name="GET_ALL_CARS_API">"http://26.42.34.148/api/get_all_cars_h.php"</string>
+    <string name="GET_CARS_API">"http://10.0.2.2/api/get_all_cars_h.php"</string>
 
     <string-array name="location_values">
         <item>Select a Location</item>

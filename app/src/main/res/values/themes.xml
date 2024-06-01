@@ -16,8 +16,20 @@
         <item name="android:gravity">center </item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">50dp</item>
-
     </style>
+
+    <!-- headlines text style -->
+    <style name="BrowseTextStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">35dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:gravity">center </item>
+        <item name="android:layout_width">155dp</item>
+        <item name="android:layout_height">80dp</item>
+    </style>
+
 
     <!-- normal text Style -->
     <style name="NormalTextStyle" parent="android:Widget.TextView">
@@ -29,7 +41,6 @@
 
 
     <style name="BackButton" parent="Widget.AppCompat.Button">
-
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_width">50dp</item>
