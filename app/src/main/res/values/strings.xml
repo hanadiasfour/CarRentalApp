@@ -14,6 +14,9 @@
     <string name="calPrice">Price to Pay</string>
     <string name="request_rent">Place Rent Request</string>
 
+
+    <string name="GET_ALL_CARS_API">"http://26.42.34.148/api/get_all_cars_h.php"</string>
+
     <string-array name="location_values">
         <item>Select a Location</item>
         <item>Ramallah</item>

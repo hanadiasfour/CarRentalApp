@@ -1,12 +1,13 @@
 package com.example.mobileproject;
 
-public class CarCatalogItemModel {//hhhhhhh
+public class CarCatalogItemModel {
     //variables
-    private int image, price;
-    private String name;
+    private int price;
+    private String name,image,car_id;
 
 //constructor
-    public CarCatalogItemModel(int image, int price, String name) {
+    public CarCatalogItemModel(String car_id,String image, int price, String name) {
+        this.car_id = car_id;
         this.image = image;
         this.price = price;
         this.name = name;
@@ -14,7 +15,7 @@ public class CarCatalogItemModel {//hhhhhhh
 
 
     //getters
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
@@ -25,4 +26,5 @@ public class CarCatalogItemModel {//hhhhhhh
     public String getName() {
         return name;
     }
+     public String getCar_id(){return car_id;}
 }

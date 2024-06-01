@@ -2,11 +2,17 @@ package com.example.mobileproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MyCarsActivity extends AppCompatActivity {
 
     private ImageButton photoButton;
@@ -43,8 +49,39 @@ public class MyCarsActivity extends AppCompatActivity {
                 addCarsOpen();
             }
         });
-    }
+        // Initialize and assign variable
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.my_cars_nav_item);
+
+        // Perform item selected listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int id = item.getItemId();
+                if (id == R.id.browse_cars_nav_item) {
+                    startActivity(new Intent(getApplicationContext(), BrowseCarsActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (id == R.id.my_cars_nav_item) {
+                    return true;
+                } else if (id == R.id.settings_nav_item) {
+                    startActivity(new Intent(getApplicationContext(), Settings.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (id == R.id.renting_nav_item) {
+
+                    startActivity(new Intent(getApplicationContext(), RentingActivity.class));
+                    overridePendingTransition(0, 0);
+
+                }
+
+                return false;
+            }
+        });
+    }
     private void openPhoto() {
         Intent intent = new Intent(this, Request.class);
         startActivity(intent);

@@ -10,6 +10,9 @@ constraintlayout = "2.1.4"
 materialVersion = "1.13.0-alpha02"
 recyclerviewV7 = "28.0.0"
 recyclerview = "1.4.0-alpha01"
+volley = "1.2.1"
+volleyCronet = "1.2.1"
+glide = "5.0.0-rc01"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -22,6 +25,9 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 google-material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 recyclerview-v7 = { group = "com.android.support", name = "recyclerview-v7", version.ref = "recyclerviewV7" }
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
+volley-cronet = { group = "com.android.volley", name = "volley-cronet", version.ref = "volleyCronet" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
