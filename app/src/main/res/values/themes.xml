@@ -89,8 +89,8 @@
         <item name="trackColorInactive">@color/blue2</item>
         <item name="thumbStrokeWidth">2dp</item>
         <item name="android:valueFrom">0</item>
-        <item name="android:valueTo">10000</item>
-        <item name="android:stepSize">1000</item>
+        <item name="android:valueTo">2000</item>
+        <item name="android:stepSize">100</item>
     </style>
 
     <!-- headlines text style -->

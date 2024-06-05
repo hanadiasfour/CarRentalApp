@@ -18,6 +18,7 @@
         android:queryHint="Search cars" />
 
 
+
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/CCI_RecyclerView"
     android:layout_width="match_parent"

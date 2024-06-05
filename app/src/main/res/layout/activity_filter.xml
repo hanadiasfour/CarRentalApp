@@ -32,7 +32,7 @@
     <Spinner
         android:id="@+id/location_spinner_filter"
         android:layout_toRightOf="@+id/location_label"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:layout_alignParentTop="true"
@@ -40,7 +40,8 @@
         android:layout_marginLeft="30dp"
         android:entries="@array/location_values"
         android:spinnerMode="dropdown"
-        android:textSize="20dp"
+        android:background="@drawable/border"
+        android:textSize="15dp"
 
         />
 
@@ -90,19 +91,21 @@
         >
 
         <RadioButton
-            android:id="@+id/price_dsc_button"
+            android:id="@+id/price_asc_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/price_asc_label"
+            android:checked="false"
             style="@style/NormalTextStyle"
             />
 
 
         <RadioButton
-            android:id="@+id/price_asc_button"
+            android:id="@+id/price_dsc_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/price_dsc_label"
+            android:checked="false"
             style="@style/NormalTextStyle"
             />
     </RadioGroup>
@@ -123,15 +126,17 @@
             android:text="@string/apply_filter"
             app:backgroundTint="@null"
             style="@style/AppButtonStyle"
+            android:onClick="applyFilters"
             />
 
         <Button
             android:id="@+id/btn_cancel_filters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancel_filter"
+            android:text="@string/clear_filter"
             app:backgroundTint="@null"
             style="@style/AppButtonStyle"
+            android:onClick="clearFilters"
             />
     </LinearLayout>
 

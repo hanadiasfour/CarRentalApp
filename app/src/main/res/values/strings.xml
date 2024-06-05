@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- View Names/Text-->
     <string name="app_name">MobileProject</string>
     <string name="rent_button">Rent This Car!</string>
     <string name="location_spinner_label">Location</string>
@@ -7,7 +9,7 @@
     <string name="price_asc_label">Ascending</string>
     <string name="price_dsc_label">Descending</string>
     <string name="apply_filter">Apply</string>
-    <string name="cancel_filter">Cancel</string>
+    <string name="clear_filter">Clear</string>
     <string name="pickNdrop">Pickup and Drop-off Location</string>
     <string name="startDate">From Date</string>
     <string name="endDate">To Date</string>
@@ -16,10 +18,23 @@
     <string name="price_per_day">/ Per Day</string>
 
 
-    <string name="GET_CARS_API">"http://10.0.2.2/api/get_all_cars_h.php"</string>
+    <!-- Filter returns result to Browser Intent name-->
+    <string name="FILTER_CONSTRUCTED_URL">filter_URL</string>
+
+
+    <!-- Browser to Filter Bundle variables (to keep track of prev put filter) -->
+    <string name="LOC">location</string>
+    <string name="LOW">lower</string>
+    <string name="HIGH">higher</string>
+    <string name="ORD">order</string>
+
+    <string name="SHARED_KEY">filterSP</string>
+
+
+
 
     <string-array name="location_values">
-        <item>Select a Location</item>
+        <item>Select</item>
         <item>Ramallah</item>
         <item>Nablus</item>
         <item>Jerusalem</item>
@@ -32,6 +47,6 @@
 
     <string-array name="range_values">
         <item>0</item>
-        <item>10000</item>
+        <item>2000</item>
     </string-array>
 </resources>
