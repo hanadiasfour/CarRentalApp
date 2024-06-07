@@ -16,6 +16,7 @@
     <string name="calPrice">Price to Pay</string>
     <string name="request_rent">Place Rent Request</string>
     <string name="price_per_day">/ Per Day</string>
+    <string name="Location">Location:</string>
 
 
     <!-- Filter returns result to Browser Intent name-->
@@ -29,6 +30,15 @@
     <string name="ORD">order</string>
 
     <string name="SHARED_KEY">filterSP</string>
+
+    <!--Browser to clicked a car to view info-->
+    <string name="CAR_ID">car_id</string>
+
+
+    <!--used in the intent that opens the view car activity to know where it came from-->
+    <string name="VIEW_CAR_SOURCE">vc_src</string>
+    <string name="FROM_BROWSE">browse</string>
+    <string name="FROM_RENT">rent</string>
 
 
 
