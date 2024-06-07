@@ -1,5 +1,6 @@
 package com.example.mobileproject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
     //variables
     private Context context;
     private ArrayList<CarCatalogItemModel> catalogList;
+    private CarCatalogItemModel car;
+
 
 
 
@@ -54,10 +57,9 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CCI_ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CCI_ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        final CarCatalogItemModel car = catalogList.get(position);
-//        CardView cardView = holder.cardView;
+        car = catalogList.get(position);
         ImageView image = holder.carImg;
         TextView name = holder.name;
         TextView price = holder.price;
@@ -69,14 +71,14 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the click event here
-                Toast.makeText(context, "Clicked: " + name, Toast.LENGTH_SHORT).show();
+                car = catalogList.get(position);
 
-
+                //constructing intent and putting data into it
                 Intent intent = new Intent(context,ViewCarActivity.class);
-//                intent.putExtra(the car id from database)
+                intent.putExtra(context.getString(R.string.CAR_ID),car.getCar_id());
+                intent.putExtra(context.getString(R.string.VIEW_CAR_SOURCE),context.getString(R.string.FROM_BROWSE));
 
-                context.startActivity(intent);
+                context.startActivity(intent);//starting activity
 
             }
         });
@@ -89,20 +91,6 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
 //        TextView name = holder.name;
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the click event here
-                Toast.makeText(context, "Clicked: " + name, Toast.LENGTH_SHORT).show();
-
-
-                Intent intent = new Intent(context,ViewCarActivity.class);
-//                intent.putExtra(the car id from database)
-
-                context.startActivity(intent);
-
-            }
-        });
 
     }
 
