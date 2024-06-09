@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.zip.Inflater;
@@ -25,6 +26,7 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
     private Context context;
     private ArrayList<CarCatalogItemModel> catalogList;
     private CarCatalogItemModel car;
+    private String USER_KEY;
 
 
 
@@ -38,9 +40,10 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
 
 
     //constructor
-    public CCI_RecyclerViewAdapter(Context context, ArrayList<CarCatalogItemModel> catalogList){
+    public CCI_RecyclerViewAdapter(Context context, ArrayList<CarCatalogItemModel> catalogList, String USER_KEY){
         this.catalogList = catalogList;
         this.context = context;
+        this.USER_KEY = USER_KEY;
     }
 
     @NonNull
@@ -64,8 +67,16 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
         TextView name = holder.name;
         TextView price = holder.price;
 
+        // to show a placeholder while loading
+        RequestOptions reqOp = new RequestOptions()
+                .placeholder(R.drawable.loading_dots) // the placeholder image
+                .error(R.drawable.ic_launcher_foreground); // the error image
 
-        Glide.with(context).load(car.getImage()).into(image);
+        Glide.with(context)
+                .setDefaultRequestOptions(reqOp).load(car.getImage()).into(image);
+
+
+        //Glide.with(context).load(car.getImage()).into(image);
         price.setText(car.getPrice()+"");
         name.setText(car.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +88,7 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
                 Intent intent = new Intent(context,ViewCarActivity.class);
                 intent.putExtra(context.getString(R.string.CAR_ID),car.getCar_id());
                 intent.putExtra(context.getString(R.string.VIEW_CAR_SOURCE),context.getString(R.string.FROM_BROWSE));
+                intent.putExtra(context.getString(R.string.USER_KEY),USER_KEY);
 
                 context.startActivity(intent);//starting activity
 
@@ -110,6 +122,7 @@ public class CCI_RecyclerViewAdapter extends RecyclerView.Adapter<CCI_RecyclerVi
             carImg =(ImageView) itemView.findViewById(R.id.car_catalog_item_image);
             price =(TextView) itemView.findViewById(R.id.car_catalog_item_price);
             name =(TextView) itemView.findViewById(R.id.car_catalog_item_name);
+
 
         }
     }

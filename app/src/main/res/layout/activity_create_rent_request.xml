@@ -28,7 +28,7 @@
     <ScrollView
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_below="@+id/create_rent_request_back"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
@@ -38,51 +38,32 @@
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:orientation="vertical"
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
             >
-            <TextView
-                style="@style/HeadlineTextStyle"
-                android:text="@string/pickNdrop"
-                android:layout_width="wrap_content"
-                android:layout_gravity="left"
-                android:layout_margin="0dp"
-                />
-
-            <Spinner
-                style="@style/CustomSpinnerStyle"
-                android:id="@+id/create_rent_request_spinner"
-                android:layout_marginBottom="20dp"
-                android:layout_width="220dp"
-                android:layout_height="60dp"
-                android:entries="@array/location_values"
-                android:background="@drawable/border"
-                />
-
-
-
-
 
             <TextView
                 style="@style/HeadlineTextStyle"
                 android:text="@string/startDate"
                 android:layout_width="wrap_content"
                 android:layout_gravity="left"
-                android:layout_margin="0dp"
             />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 >
 
                 <TextView
                     android:id="@+id/create_rent_request_start_text"
                     style="@style/NormalTextStyle"
-                    android:text="date here"
+                    android:text="@string/emptyDatesLabel"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:background="@drawable/border"
@@ -114,12 +95,15 @@
                 android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
+                android:gravity="center"
                 >
 
                 <TextView
                     android:id="@+id/create_rent_request_end_text"
                     style="@style/NormalTextStyle"
-                    android:text="date here"
+                    android:text="@string/emptyDatesLabel"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:background="@drawable/border"
@@ -149,12 +133,15 @@
             android:layout_height="60dp"
             android:orientation="horizontal"
             android:layout_marginBottom="20dp"
+            android:gravity="center"
             >
 
         <TextView
                 android:id="@+id/create_rent_request_price"
                 style="@style/NormalTextStyle"
-                android:text="2000"
+                android:text="@string/calculatedPrice"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_width="170dp"
                 android:layout_height="40dp"
                 android:background="@drawable/border"
@@ -183,6 +170,5 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 </RelativeLayout>

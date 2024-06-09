@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,8 +33,10 @@ public class ViewCarActivity extends AppCompatActivity {
 
     private ImageView carImg, ownerImg ;
     private TextView carName, price,description,location,ownerName,ownerNumber;
-    private String carID,ownerGmail;
+    private String carID,ownerGmail,cName;
+    private int carPrice;
     private final String GET_SPECIFIC_CAR_URL = "http://10.0.2.2/api/get_specific_car_and_owner_h.php";
+    private String USER_KEY ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class ViewCarActivity extends AppCompatActivity {
             carID = intent.getStringExtra(getString(R.string.CAR_ID));
         }
 
+        USER_KEY = intent.getStringExtra(getString(R.string.USER_KEY));
+
     }
 
 
@@ -89,15 +94,15 @@ public class ViewCarActivity extends AppCompatActivity {
 
                         String location = obj.getString("location");
                         String carImg = obj.getString("picture");
-                        int price =obj.getInt("price_per_day");
+                        carPrice = obj.getInt("price_per_day");
                         String info =obj.getString("description");
-                        String carName = obj.getString("name");
+                        cName = obj.getString("name");
                         ownerGmail = obj.getString("owner");
                         String ownerName = obj.getString("owner_name");
                         int phone = obj.getInt("owner_phone");
                         String ownerImg = obj.getString("owner_photo");
 
-                        setInfo(location,carImg,price,info,carName,ownerName,phone,ownerImg);
+                        setInfo(location,carImg,carPrice,info,cName,ownerName,phone,ownerImg);
 
 
 
@@ -119,9 +124,6 @@ public class ViewCarActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(request);
 
 
-
-
-
     }
 
 
@@ -129,9 +131,14 @@ public class ViewCarActivity extends AppCompatActivity {
     //given the parameter info obtained from the backend database, set teh views to these variables
     private void setInfo(String loc,String cImg,int price,String info,String cName,String oName, int phone,String oImg){
 
+        // to show a placeholder while loading
+        RequestOptions reqOp = new RequestOptions()
+                .placeholder(R.drawable.loading_dots) // the placeholder image
+                .error(R.drawable.ic_launcher_foreground); // the error image
+
         //using glide to load the link images to image views
-        Glide.with(this).load(cImg).into(carImg);
-        Glide.with(this).load(oImg).into(ownerImg);
+        Glide.with(this).setDefaultRequestOptions(reqOp).load(cImg).into(carImg);
+        Glide.with(this).setDefaultRequestOptions(reqOp).load(oImg).into(ownerImg);
 
         //setting the text views with the correlated values obtained from backend
         this.price.setText(price+"");
@@ -146,14 +153,19 @@ public class ViewCarActivity extends AppCompatActivity {
     public void setDetailsToRentCar(View view){
 
         Intent intent = new Intent(this,CreateRentRequestActivity.class);
+        intent.putExtra(getString(R.string.USER_KEY),USER_KEY);
+        intent.putExtra(getString(R.string.CAR_ID),carID);
+        intent.putExtra(getString(R.string.CAR_PRICE),carPrice);
+        intent.putExtra(getString(R.string.CAR_NAME),cName);
         startActivity(intent);
 
     }
 
     public void backToBrowse(View view){
-Intent intent = new Intent(this,BrowseCarsActivity.class);
-startActivity(intent);
-finish();
+    Intent intent = new Intent(this,BrowseCarsActivity.class);
+    intent.putExtra(getString(R.string.USER_KEY),USER_KEY);
+    startActivity(intent);
+    finish();
 
 
 

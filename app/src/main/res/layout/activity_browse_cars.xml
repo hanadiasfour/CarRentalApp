@@ -18,13 +18,24 @@
         android:queryHint="Search cars" />
 
 
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/noResults"
+        android:layout_below="@+id/searchView"
+        android:layout_alignParentLeft="true"
+        style="@style/HeadlineTextStyle"
+        android:padding="20dp"
+        android:visibility="gone"/>
+
 
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/CCI_RecyclerView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:layout_below="@+id/searchView"
+    android:layout_below="@+id/emptyView"
     android:layout_alignParentLeft="true"
     android:layout_above="@+id/bottom_navigation"
     />

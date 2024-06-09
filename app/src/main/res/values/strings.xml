@@ -17,6 +17,16 @@
     <string name="request_rent">Place Rent Request</string>
     <string name="price_per_day">/ Per Day</string>
     <string name="Location">Location:</string>
+    <string name="emptyDatesLabel">- - Empty - -</string>
+    <string name="calculatedPrice">0.00</string>
+    <string name="AlertOKButton">OK</string>
+    <string name="AlertTitle">Notice</string>
+    <string name="AlertText">Incorrect Date Selection</string>
+    <string name="noResults">Woops!\n\n\nThere are no cars that match what you\'re looking for.\n\nPlease alter your search criteria.</string>
+
+
+    <!-- USER KEY (gmail of user) obtained from login, propagated through app-->
+    <string name="USER_KEY">whoAmI</string>
 
 
     <!-- Filter returns result to Browser Intent name-->
@@ -33,6 +43,9 @@
 
     <!--Browser to clicked a car to view info-->
     <string name="CAR_ID">car_id</string>
+    <string name="CAR_PRICE">car_price</string>
+    <string name="CAR_NAME">car_name</string>
+
 
 
     <!--used in the intent that opens the view car activity to know where it came from-->

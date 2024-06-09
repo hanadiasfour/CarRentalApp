@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,9 +35,11 @@ public class BrowseCarsActivity extends AppCompatActivity {
 
     private ArrayList<CarCatalogItemModel> catalogList = new ArrayList<>();//to hold the cars which appear in catalog
     private RecyclerView CCI_RV;
+    private TextView emptyView;
     private CCI_RecyclerViewAdapter CCI_adapter;
     private final String GET_DATA_URL = "http://10.0.2.2/api/get_all_cars_h.php";
     private final String GET_SEARCHED_URL = "http://10.0.2.2/api/get_searched_car_h.php";
+    private String USER_KEY ="fatenWoman@gmail.com";//should be changed depending on the user that logged in
     private SearchView searchView;
     private final int BROWSE_TO_FILTER = 121;
 //    private ProgressBar progressBar;
@@ -85,12 +88,17 @@ public class BrowseCarsActivity extends AppCompatActivity {
             }
         });
 
+        //takes the gmail in which this user logged in with
+//        Intent intent = getIntent();
+//        USER_KEY = intent.getStringExtra(getString(R.string.USER_KEY));
+
     }
 
     private void setViews(){
 
         CCI_RV = (RecyclerView)findViewById(R.id.CCI_RecyclerView);
         searchView = (SearchView) findViewById(R.id.searchView);
+        emptyView = (TextView) findViewById(R.id.emptyView);
 //        progressBar = findViewById(R.id.progressBar);
 
 
@@ -186,11 +194,13 @@ public class BrowseCarsActivity extends AppCompatActivity {
 
 
                 if (CCI_adapter == null) {
-                    CCI_adapter = new CCI_RecyclerViewAdapter(BrowseCarsActivity.this, catalogList);
+                    CCI_adapter = new CCI_RecyclerViewAdapter(BrowseCarsActivity.this, catalogList, USER_KEY);
                     CCI_RV.setAdapter(CCI_adapter);
                 } else {
                     CCI_adapter.setFiltered(catalogList);
                 }
+
+                checkIfEmpty();
 
             }
         }, new Response.ErrorListener() {
@@ -219,6 +229,16 @@ public class BrowseCarsActivity extends AppCompatActivity {
     }
 
 
+
+    private void checkIfEmpty() {
+        if (catalogList.isEmpty()) {
+            CCI_RV.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            CCI_RV.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+    }
 
 
 
