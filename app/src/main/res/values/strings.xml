@@ -28,6 +28,9 @@
     <!-- USER KEY (gmail of user) obtained from login, propagated through app-->
     <string name="USER_KEY">whoAmI</string>
 
+    <string name="MY_PREF_KEY">Preferences</string>
+
+
 
     <!-- Filter returns result to Browser Intent name-->
     <string name="FILTER_CONSTRUCTED_URL">filter_URL</string>
@@ -39,7 +42,9 @@
     <string name="HIGH">higher</string>
     <string name="ORD">order</string>
 
-    <string name="SHARED_KEY">filterSP</string>
+    <string name="FilterConstructedURL">filterParaURL</string>
+    <string name ="PREF_FIRST_LAUNCH">firstLaunch"</string>
+
 
     <!--Browser to clicked a car to view info-->
     <string name="CAR_ID">car_id</string>
@@ -54,6 +59,11 @@
     <string name="FROM_RENT">rent</string>
 
 
+    <!-- API URLs -->
+    <string name="GET_DATA_URL">http://10.0.2.2/api/get_all_cars_h.php</string>
+    <string name="GET_SEARCHED_URL">http://10.0.2.2/api/get_searched_car_h.php</string>
+    <string name="GET_SPECIFIC_CAR_URL">http://10.0.2.2/api/get_specific_car_and_owner_h.php</string>
+    <string name="INSERT_REQUEST_IF_VALID_URL">http://10.0.2.2/api/insert_rent_request_h.php</string>
 
 
     <string-array name="location_values">

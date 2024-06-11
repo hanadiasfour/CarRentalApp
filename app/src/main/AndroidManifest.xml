@@ -28,17 +28,20 @@
             android:exported="false" />
         <activity
             android:name=".CreateRentRequestActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".FilterActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:theme="@style/MyDialogStyle" />
         <activity
             android:name=".ViewCarActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Main1"
-            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,6 +63,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".BrowseCarsActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:launchMode="singleTop" />
     </application>

@@ -42,17 +42,12 @@ public class CreateRentRequestActivity extends AppCompatActivity {
 
     private DatePickerDialog startDatePickerDialog,endDatePickerDialog;
     private TextView startTxt,endTxt,priceToPayTxt, carNameTitle;
-    private String USER_KEY ,carID, selectedStart,selectedEnd,cName;
-    private int carPrice =0;
     private ProgressDialog progressDialog;
-    private  SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-    private final String INSERT_REQUEST_IF_VALID_URL = "http://10.0.2.2/api/insert_rent_request_h.php";
     private AlertDialog alertDialog;
-
-//    private String[] status = {"",""};// to store the status of the API (error?,context)
-
+    private String USER_KEY ,carID, selectedStart,selectedEnd,cName,context="";
+    private int carPrice =0;
     private boolean isError = false;
-    private String context="";
+    private  SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
 
 
     @Override
@@ -73,10 +68,12 @@ public class CreateRentRequestActivity extends AppCompatActivity {
         carID = intent.getStringExtra(getString(R.string.CAR_ID));
         carPrice = intent.getIntExtra(getString(R.string.CAR_PRICE),0);
         cName = intent.getStringExtra(getString(R.string.CAR_NAME));
-
     }
 
 
+    ////////////////////////////////////////////////
+    // OPEN A WARNING DIALOG THAT SAYS WHATS WRONG//
+    ////////////////////////////////////////////////
     private void showAlertDialog(String title,String context) {
         // inflating the custom layout (alert_layout)
         View alertView = LayoutInflater.from(this).inflate(R.layout.alert_layout, null);
@@ -109,23 +106,26 @@ public class CreateRentRequestActivity extends AppCompatActivity {
 
 
 
+    //performed when send request button is pressed
+    //sends request if no errors or conflicts occur
     public void sendRentRequest(View view){
 
+        //only one date or non of the dates were selected
+        // show alert informing them about their mistake
         if(selectedStart == null||selectedEnd == null){
             showAlertDialog("Notice!","You must select a date range first to proceed with this action.");
             return;
         }
 
+        // showing the progress dialog to inform the user that some action is being done
+        progressDialog = ProgressDialog.show(this, "Hold on Tightly!", "Your Request is Being Processed ...", true);
 
-        // Show the progress dialog
-        progressDialog = ProgressDialog.show(this, "Please Wait", "Processing...", true);
+        insertIfNoConflicts();// inserts the request if no conflicts were found
 
-
-        insertIfNoConflicts();
+        //using handler to give a delay
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-
 
                 if(!isError){//no error was detected (added request in db)
                     showAlertDialog("Success!",context);
@@ -134,42 +134,36 @@ public class CreateRentRequestActivity extends AppCompatActivity {
                     showAlertDialog("Failed!",context);
                 }
 
+                // turn off the loading dialog (actions are done)
                 if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
-
             }
-        }, 1000); // 1 second delay
-
-
-//
-
-
-
+        }, 1000); // 1 second delay to show that something is happening
     }
 
+
+    /*
+    * accesses the backend db through php file using volley (api)
+    * inserts the car rental request if no conflict found in db
+    *
+    * */
     private void insertIfNoConflicts() {
 
-
-        StringRequest request = new StringRequest(Request.Method.POST, INSERT_REQUEST_IF_VALID_URL, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, getString(R.string.INSERT_REQUEST_IF_VALID_URL), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    // on below line we are displaying a success toast message.
+                    // updating the status of the backend post request access through api
                     isError = jsonObject.getBoolean("error");
                     context = jsonObject.getString("message");
 
-
-                    System.out.println(String.valueOf(isError) + context);
-
-                    ////////////////////////////////////////////////
-                    // OPEN A WARNING DIALOG THAT SAYS WHATS WRONG//
-                    ////////////////////////////////////////////////
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -178,23 +172,23 @@ public class CreateRentRequestActivity extends AppCompatActivity {
         }) {
             @Override
             public String getBodyContentType() {
-                // as we are passing data in the form of url encoded
-                // so we are passing the content type below
+                //  passing the content type below
                 return "application/x-www-form-urlencoded; charset=UTF-8";
             }
 
+            //maps the data to the variables in the backend
             @Override
             protected Map<String, String> getParams() {
-                // below line we are creating a map for storing
-                // our values in key and value pair.
+                //creating map key and value pair
                 Map<String, String> params = new HashMap<>();
-                // on below line we are passing our
-                // key and value pair to our parameters.
+
+                // passing the key and value pairs parameters
                 params.put("start", selectedStart);
                 params.put("end", selectedEnd);
                 params.put("renter_gmail", USER_KEY);
                 params.put("car_number", carID);
-                // at last we are returning our params.
+
+                //returning the params
                 return params;
             }
         };
@@ -203,113 +197,75 @@ public class CreateRentRequestActivity extends AppCompatActivity {
 
     }
 
-
-
-    private boolean validateDates(String startDateStr, String endDateStr) {
-        Date startDate = null;
-        Date endDate =null;
-        try {
-            startDate = formatter.parse(startDateStr);
-            endDate = formatter.parse(endDateStr);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-        Date today = new Date();
-
-        if (startDate.before(today)) {
-            // Start date is before today
-            return false;
-        }
-        if (endDate.before(startDate)) {
-            // End date is before start date
-            return false;
-        }
-
-        if (startDate.equals(endDate)) {
-            // Start date is the same as end date
-            return false;
-        }
-        return true;
-    }
-
-
-
-    public void backToViewCarDetails(View view){
-        Intent intent = new Intent(this,ViewCarActivity.class);
-        intent.putExtra(getString(R.string.CAR_ID),carID);
-        startActivity(intent);
-    }
-
-
-    private void setViews(){
-        startTxt = (TextView)findViewById(R.id.create_rent_request_start_text);
-        endTxt = (TextView)findViewById(R.id.create_rent_request_end_text);
-        priceToPayTxt = (TextView)findViewById(R.id.create_rent_request_price);
-        carNameTitle = (TextView)findViewById(R.id.create_rent_request_name);
-    }
-
-
-
-
+    /*
+    * this method initiates and sets the listeners on the start and end date pickers
+    * also adds constraints and triggers the method to calculated the price required for this renting req
+    *
+    * */
     private void initDatePicker(){
 
-        final boolean[] areDatesPicked = {false,false};
-        final Calendar today = Calendar.getInstance();
+        final boolean[] areDatesPicked = {false,false};//to keep track of what dates were picked so far
 
+        //start date listener
         DatePickerDialog.OnDateSetListener startDateSetListener = new DatePickerDialog.OnDateSetListener()
         {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day)
             {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                startTxt.setText(date);
-                selectedStart = date;
+                month = month + 1;// adding one since its zero based
+                String date = makeDateString(day, month, year);//constructing string representation of date
+                startTxt.setText(date);//setting text
+                selectedStart = date;// marking the selected start date
                 areDatesPicked[0] = true;// mark start date as picked
 
-                // Set minimum date for end date picker to the day after the selected start date
+                // setting the minimum date for end date picker to the day after the selected start date
+                //creating the date instance that represents one day after selected start day
                 Calendar startDate = Calendar.getInstance();
                 startDate.set(year, month - 1, day);
                 startDate.add(Calendar.DAY_OF_MONTH, 1);
+
+                //restricting the end date picker
                 endDatePickerDialog.getDatePicker().setMinDate(startDate.getTimeInMillis());
 
-                if(areDatesPicked[1]){//other date was also selected
-                    calculatePrice(selectedStart,selectedEnd);
+                if(areDatesPicked[1]){//if the other date was also selected
+                    calculatePrice(selectedStart,selectedEnd);//time to calculate the total price to pay
                 }
 
             }
         };
 
+        //end date listener
         DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener()
         {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day)
             {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
+                month = month + 1;// adding one since its zero based
+                String date = makeDateString(day, month, year);//constructing string representation of date
                 endTxt.setText(date);
                 selectedEnd = date;
-                areDatesPicked[1] = true;
+                areDatesPicked[1] = true;// mark end date as picked
 
-                // Set maximum date for start date picker to the day before the selected end date
+                // setting the maximum date for start date picker to the day before the selected end date
+                //creating the date instance that represents one day before selected start day
                 Calendar endDate = Calendar.getInstance();
                 endDate.set(year, month - 1, day);
                 endDate.add(Calendar.DAY_OF_MONTH, -1);
                 startDatePickerDialog.getDatePicker().setMaxDate(endDate.getTimeInMillis());
 
                 if(areDatesPicked[0]){//other date was also selected
-                    calculatePrice(selectedStart,selectedEnd);
+                    calculatePrice(selectedStart,selectedEnd);//time to calculate the total price to pay
                 }
             }
         };
 
         //obtaining todays date
+        Calendar today = Calendar.getInstance();
         int year = today.get(Calendar.YEAR);
         int month = today.get(Calendar.MONTH);
         int day = today.get(Calendar.DAY_OF_MONTH);
 
-        //initialize date pickers (having todays date when opening)
+        //initialize date pickers (having todays date when opening any for the first time)
         startDatePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, startDateSetListener, year, month, day);
         endDatePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, endDateSetListener, year, month, day);
 
@@ -317,44 +273,46 @@ public class CreateRentRequestActivity extends AppCompatActivity {
         today.add(Calendar.DAY_OF_MONTH, 1);
         startDatePickerDialog.getDatePicker().setMinDate(today.getTimeInMillis());
         endDatePickerDialog.getDatePicker().setMinDate(today.getTimeInMillis());
-
     }
 
 
-
-    private String makeDateString(int day, int month, int year) {
-        // Ensure day and month are always two digits
-        String dayStr = (day < 10) ? "0" + day : String.valueOf(day);
-        String monthStr = (month < 10) ? "0" + month : String.valueOf(month);
-        return year + "-" + monthStr + "-" + dayStr;
-    }
-
-
-
+    /*
+     * given the start and end dates chosen by the user, date objects are created and
+     * the number of days in between is found then multiplied by the price of the car per day
+     */
     private void calculatePrice(String start, String end){
+
+        //getting selected dates as date object from a certain format
         Date startDate = null;
         Date endDate =null;
         try {
             startDate = formatter.parse(start);
             endDate = formatter.parse(end);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            Log.e("MY_ERROR","Problem with parsing");
         }
 
 
-        //get days in between these selected dates
+        // get days in between these selected dates
         long days = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             days = ChronoUnit.DAYS.between(startDate.toInstant(),endDate.toInstant());
         }
 
-        System.out.println(days);
         int calPrice = ((int)days) * carPrice;//new price
         priceToPayTxt.setText(calPrice + "");//setting the amount
-
     }
 
 
+    //given the day, month, year, the date string is made in a certain format
+    private String makeDateString(int day, int month, int year) {
+        // making sure the day and month are always two digits
+        String d = (day < 10) ? "0" + day : String.valueOf(day);
+        String m = (month < 10) ? "0" + month : String.valueOf(month);
+        return year + "-" + m + "-" + d;//separate with -
+    }
+
+    //actions performed when clicking on the calendar buttons to open the date picker dialog
     public void openStartDatePicker(View view)
     {
         startDatePickerDialog.show();
@@ -363,6 +321,25 @@ public class CreateRentRequestActivity extends AppCompatActivity {
     public void openEndDatePicker(View view)
     {
         endDatePickerDialog.show();
+    }
+
+
+    //initialize views
+    private void setViews(){
+        startTxt = (TextView)findViewById(R.id.create_rent_request_start_text);
+        endTxt = (TextView)findViewById(R.id.create_rent_request_end_text);
+        priceToPayTxt = (TextView)findViewById(R.id.create_rent_request_price);
+        carNameTitle = (TextView)findViewById(R.id.create_rent_request_name);
+    }
+
+
+    // back button that leads to the view car details activity
+    // collects and sends the relevant information needed for the previous activity
+    public void backToViewCarDetails(View view){
+        Intent intent = new Intent(this,ViewCarActivity.class);
+        intent.putExtra(getString(R.string.CAR_ID),carID);// to reload the information of the selected car
+        intent.putExtra(getString(R.string.USER_KEY),USER_KEY);//keep track of the person logged in
+        startActivity(intent);// invoking the activity
     }
 
 }

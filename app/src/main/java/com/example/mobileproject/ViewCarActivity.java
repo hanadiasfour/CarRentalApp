@@ -1,10 +1,14 @@
 package com.example.mobileproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +35,13 @@ import java.util.ArrayList;
 public class ViewCarActivity extends AppCompatActivity {
 
 
+    // views
     private ImageView carImg, ownerImg ;
     private TextView carName, price,description,location,ownerName,ownerNumber;
-    private String carID,ownerGmail,cName;
+    private String carID,ownerGmail,cName,USER_KEY ="";
     private int carPrice;
-    private final String GET_SPECIFIC_CAR_URL = "http://10.0.2.2/api/get_specific_car_and_owner_h.php";
-    private String USER_KEY ="";
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,45 +49,48 @@ public class ViewCarActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_view_car);
         setViews();
+        handleIntent(getIntent());
 
 
+        //creating the url that will obtain the info of a certain car from db
+        String constructedUrl = getString(R.string.GET_SPECIFIC_CAR_URL) + "?carID=" + carID;
+        getData(constructedUrl);// get data from backend using API
 
-        Intent givenIntent = getIntent();//obtain the intent that invoked this activity
-        handleIntent(givenIntent);
 
-
-        String constructedUrl = GET_SPECIFIC_CAR_URL + "?carID=" + carID;
-        System.out.println(constructedUrl);
-        getData(constructedUrl);
+        //action to dial number of owner
+        RelativeLayout relativeLayout = findViewById(R.id.owner_layout);
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber = "tel:"+ ownerNumber.getText().toString();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+                dialIntent.setData(Uri.parse(phoneNumber));
+                startActivity(dialIntent);
+            }
+        });
 
 
     }
+
 
     private void handleIntent(Intent intent){
-
-
-        if(intent.hasExtra(getString(R.string.CAR_ID))) {
-            carID = intent.getStringExtra(getString(R.string.CAR_ID));
-        }
-
+        carID = intent.getStringExtra(getString(R.string.CAR_ID));
         USER_KEY = intent.getStringExtra(getString(R.string.USER_KEY));
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("LifeCycle","on stop browse");
+        editor.putString(getString(R.string.USER_KEY), USER_KEY);
+        editor.apply(); // saving asynchronously using apply
     }
 
 
-    private void setViews(){
-        carImg = (ImageView)findViewById(R.id.view_car_image);
-        ownerImg = (ImageView)findViewById(R.id.view_car_owner_pic);
-        ownerName = (TextView)findViewById(R.id.view_car_owner_name);
-        ownerNumber = (TextView)findViewById(R.id.view_car_owner_number);
-        carName = (TextView)findViewById(R.id.view_car_name);
-        price = (TextView)findViewById(R.id.view_car_price);
-        description = (TextView)findViewById(R.id.view_car_info);
-        location = (TextView)findViewById(R.id.view_car_location);
-
-    }
-
-
+/*
+* given the constructed url, the backend db is accessed using an php api
+* the data obtained from the db is then presented to the user through the views
+* */
     private void getData(String url){
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
@@ -92,6 +100,7 @@ public class ViewCarActivity extends AppCompatActivity {
                     try {
                         JSONObject obj = response.getJSONObject(0);
 
+                        //extracting info from JSON object from backend
                         String location = obj.getString("location");
                         String carImg = obj.getString("picture");
                         carPrice = obj.getInt("price_per_day");
@@ -102,16 +111,12 @@ public class ViewCarActivity extends AppCompatActivity {
                         int phone = obj.getInt("owner_phone");
                         String ownerImg = obj.getString("owner_photo");
 
+                        //setting views info
                         setInfo(location,carImg,carPrice,info,cName,ownerName,phone,ownerImg);
-
-
 
                     }catch(JSONException exception){
                         Log.d("volley_error1", exception.toString());
                     }
-
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -120,18 +125,15 @@ public class ViewCarActivity extends AppCompatActivity {
             }
         });
 
-
         Volley.newRequestQueue(this).add(request);
-
-
     }
 
 
 
-    //given the parameter info obtained from the backend database, set teh views to these variables
+    //given info obtained from the backend db, set the views to these variables to present to the user
     private void setInfo(String loc,String cImg,int price,String info,String cName,String oName, int phone,String oImg){
 
-        // to show a placeholder while loading
+        // to show a placeholder while loading images
         RequestOptions reqOp = new RequestOptions()
                 .placeholder(R.drawable.loading_dots) // the placeholder image
                 .error(R.drawable.ic_launcher_foreground); // the error image
@@ -150,24 +152,40 @@ public class ViewCarActivity extends AppCompatActivity {
 
     }
 
+    /*
+    * action performed when choosing to rent the selected car
+    * saves the important data needed for the next activity into a intent
+    * invokes the next activity(for creating a new request)
+    * */
     public void setDetailsToRentCar(View view){
-
         Intent intent = new Intent(this,CreateRentRequestActivity.class);
         intent.putExtra(getString(R.string.USER_KEY),USER_KEY);
         intent.putExtra(getString(R.string.CAR_ID),carID);
         intent.putExtra(getString(R.string.CAR_PRICE),carPrice);
         intent.putExtra(getString(R.string.CAR_NAME),cName);
         startActivity(intent);
-
     }
 
+    //back button action that returns to browsing screen activity
     public void backToBrowse(View view){
     Intent intent = new Intent(this,BrowseCarsActivity.class);
-    intent.putExtra(getString(R.string.USER_KEY),USER_KEY);
+    intent.putExtra(getString(R.string.USER_KEY),USER_KEY);// keep track of this person that logged in
     startActivity(intent);
-    finish();
+    finish();// destroy this activity
+    }
 
+    //initializes views
+    private void setViews(){
+        carImg = (ImageView)findViewById(R.id.view_car_image);
+        ownerImg = (ImageView)findViewById(R.id.view_car_owner_pic);
+        ownerName = (TextView)findViewById(R.id.view_car_owner_name);
+        ownerNumber = (TextView)findViewById(R.id.view_car_owner_number);
+        carName = (TextView)findViewById(R.id.view_car_name);
+        price = (TextView)findViewById(R.id.view_car_price);
+        description = (TextView)findViewById(R.id.view_car_info);
+        location = (TextView)findViewById(R.id.view_car_location);
 
-
+        sharedPref = getSharedPreferences(getString(R.string.MY_PREF_KEY), Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
     }
 }

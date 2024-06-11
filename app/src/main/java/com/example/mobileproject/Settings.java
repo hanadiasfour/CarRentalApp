@@ -15,6 +15,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Settings extends AppCompatActivity {
 
+    private String USER_KEY ="";//should be changed depending on the user that logged in
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,19 +39,25 @@ public class Settings extends AppCompatActivity {
 
                 int id = item.getItemId();
                 if (id == R.id.browse_cars_nav_item) {
-                    startActivity(new Intent(getApplicationContext(), BrowseCarsActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), BrowseCarsActivity.class);
+                    intent.putExtra(getString(R.string.USER_KEY),USER_KEY);//sending the logged in user
+                    startActivity(intent);
                     overridePendingTransition(0,0);
                     return true;
                 }else if (id == R.id.settings_nav_item) {
                     return true;
                 } else if (id == R.id.my_cars_nav_item){
-                    startActivity(new Intent(getApplicationContext(), MyCarsActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), MyCarsActivity.class);
+                    intent.putExtra(getString(R.string.USER_KEY),USER_KEY);//sending the logged in user
+                    startActivity(intent);
                     overridePendingTransition(0, 0);
                     return true;
                 }
                 else if(id == R.id.renting_nav_item){
 
-                    startActivity(new Intent(getApplicationContext(), RentingActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), RentingActivity.class);
+                    intent.putExtra(getString(R.string.USER_KEY),USER_KEY);//sending the logged in user
+                    startActivity(intent);
                     overridePendingTransition(0, 0);
 
                 }
