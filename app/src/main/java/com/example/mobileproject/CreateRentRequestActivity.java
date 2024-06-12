@@ -3,8 +3,10 @@ package com.example.mobileproject;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,6 +51,9 @@ public class CreateRentRequestActivity extends AppCompatActivity {
     private boolean isError = false;
     private  SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
 
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +69,19 @@ public class CreateRentRequestActivity extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent){
+        if(intent!=null){
        USER_KEY = intent.getStringExtra(getString(R.string.USER_KEY));
         carID = intent.getStringExtra(getString(R.string.CAR_ID));
         carPrice = intent.getIntExtra(getString(R.string.CAR_PRICE),0);
         cName = intent.getStringExtra(getString(R.string.CAR_NAME));
+
+        }else{
+            carID =  sharedPref.getString(getString(R.string.CAR_ID),null);
+            cName = sharedPref.getString(getString(R.string.CAR_NAME),null);
+            USER_KEY = sharedPref.getString(getString(R.string.USER_KEY),null);
+           carPrice =  sharedPref.getInt(getString(R.string.CAR_PRICE),0);
+
+        }
     }
 
 
@@ -330,6 +344,8 @@ public class CreateRentRequestActivity extends AppCompatActivity {
         endTxt = (TextView)findViewById(R.id.create_rent_request_end_text);
         priceToPayTxt = (TextView)findViewById(R.id.create_rent_request_price);
         carNameTitle = (TextView)findViewById(R.id.create_rent_request_name);
+        sharedPref = getSharedPreferences(getString(R.string.MY_PREF_KEY), Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
     }
 
 
@@ -342,6 +358,16 @@ public class CreateRentRequestActivity extends AppCompatActivity {
         startActivity(intent);// invoking the activity
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        editor.putString(getString(R.string.CAR_ID),carID);
+        editor.putString(getString(R.string.USER_KEY),USER_KEY);
+        editor.putInt(getString(R.string.CAR_PRICE),carPrice);
+        editor.putString(getString(R.string.CAR_NAME),cName);
+        editor.apply();
+
+    }
 }
 
 
