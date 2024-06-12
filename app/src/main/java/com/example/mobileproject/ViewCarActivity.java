@@ -74,8 +74,14 @@ public class ViewCarActivity extends AppCompatActivity {
 
 
     private void handleIntent(Intent intent){
-        carID = intent.getStringExtra(getString(R.string.CAR_ID));
-        USER_KEY = intent.getStringExtra(getString(R.string.USER_KEY));
+
+        if(intent !=null) {
+            carID = intent.getStringExtra(getString(R.string.CAR_ID));
+            USER_KEY = intent.getStringExtra(getString(R.string.USER_KEY));
+        }else{
+            USER_KEY = sharedPref.getString(getString(R.string.USER_KEY),null);
+            carID = sharedPref.getString(getString(R.string.CAR_ID),null);
+        }
     }
 
     @Override
@@ -83,6 +89,7 @@ public class ViewCarActivity extends AppCompatActivity {
         super.onStop();
         Log.d("LifeCycle","on stop browse");
         editor.putString(getString(R.string.USER_KEY), USER_KEY);
+        editor.putString(getString(R.string.CAR_ID),carID);
         editor.apply(); // saving asynchronously using apply
     }
 
