@@ -22,7 +22,7 @@ https://github.com/user-attachments/assets/07bacdef-5c05-46f0-964f-5f08fb114b48
 ## Credits
 This project was a collaborative work done by:
 @HanadiAsfour
-@yusraTareq
+@YusraTareq
 @BatoolShini
 @OsamaAbuJarad
 
