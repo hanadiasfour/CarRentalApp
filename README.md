@@ -12,7 +12,7 @@ The idea was to design a mobile application that allows the community to collabo
 - **Notifications:** Stay updated with notifications about booking confirmations and new requests.
 - **Host Management:** As a host, add, edit, or delete car listings. Manage booking requests and view your cars on the platform.
 
-## UML Diagram Database Design:
+## Database ERD:
 
 ![ERDmobile drawio](https://github.com/user-attachments/assets/69366821-8bec-433f-9ddc-3d6996a6b132)
 
